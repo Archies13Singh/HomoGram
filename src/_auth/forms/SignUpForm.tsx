@@ -77,8 +77,8 @@ const SignUpForm = () => {
 
   return (
     <Form {...form}>
-      <div className="sm:w-420 flex-center flex-col">
-        <img src="../../../public/assets/images/logo.svg" alt="" />
+      <div className="sm:w-400 flex-center flex-col">
+        <img src="../../../public/assets/images/logo.png" alt="" style={{objectFit:'contain',marginTop:32}} width={312} height={312}/>
         <h2 className="h3-bold md:h2-bold pt-5 sm:pt-12">
           {" "}
           Create a new Account{" "}
@@ -100,9 +100,7 @@ const SignUpForm = () => {
                   <Input type="text" className="shad-input" {...field} />
                 </FormControl>
 
-                <FormDescription>
-                  This is your public display name.
-                </FormDescription>
+                
                 <FormMessage />
               </FormItem>
             )}
@@ -117,9 +115,7 @@ const SignUpForm = () => {
                   <Input type="text" className="shad-input" {...field} />
                 </FormControl>
 
-                <FormDescription>
-                  This is your public display name.
-                </FormDescription>
+                
                 <FormMessage />
               </FormItem>
             )}
@@ -134,9 +130,7 @@ const SignUpForm = () => {
                   <Input type="email" className="shad-input" {...field} />
                 </FormControl>
 
-                <FormDescription>
-                  This is your public display name.
-                </FormDescription>
+                
                 <FormMessage />
               </FormItem>
             )}
@@ -151,9 +145,7 @@ const SignUpForm = () => {
                   <Input type="password" className="shad-input" {...field} />
                 </FormControl>
 
-                <FormDescription>
-                  This is your public display name.
-                </FormDescription>
+                
                 <FormMessage />
               </FormItem>
             )}
@@ -172,7 +164,7 @@ const SignUpForm = () => {
             Already have an Account ?{" "}
             <Link
               to="/sign-in"
-              className="text-primary-500 text-small-semibold ml-1"
+              className="text-emerald-500 text-small-semibold ml-1"
             >
               Log In
             </Link>

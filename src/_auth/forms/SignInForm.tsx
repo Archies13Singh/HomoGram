@@ -62,7 +62,15 @@ const SignInForm = () => {
   return (
     <Form {...form}>
       <div className="sm:w-420 flex-center flex-col">
-        <img src="../../../public/assets/images/logo.svg" alt="" />
+        <div>
+          <img
+            src="../../../public/assets/images/logo.png"
+            alt=""
+            style={{ objectFit: "contain" }}
+            width={312}
+            height={312}
+          />
+        </div>
         <h2 className="h3-bold md:h2-bold pt-5 sm:pt-12">
           {" "}
           Login in to your Account{" "}
@@ -83,10 +91,6 @@ const SignInForm = () => {
                 <FormControl>
                   <Input type="email" className="shad-input" {...field} />
                 </FormControl>
-
-                <FormDescription>
-                  This is your public display name.
-                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -100,10 +104,6 @@ const SignInForm = () => {
                 <FormControl>
                   <Input type="password" className="shad-input" {...field} />
                 </FormControl>
-
-                <FormDescription>
-                  This is your public display name.
-                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -122,7 +122,7 @@ const SignInForm = () => {
             Don't have an account ?{" "}
             <Link
               to="/sign-up"
-              className="text-primary-500 text-small-semibold ml-1"
+              className="text-emerald-500 text-small-semibold ml-1"
             >
               Sign Up
             </Link>
