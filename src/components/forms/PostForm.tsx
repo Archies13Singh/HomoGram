@@ -42,6 +42,7 @@ const PostForm = ({ post }: PostFormProps) => {
   });
 
   async function onSubmit(values: z.infer<typeof PostValidation>) {
+    
     const newPost = await createPost({
       ...values,
       userId: user.id,
@@ -80,7 +81,7 @@ const PostForm = ({ post }: PostFormProps) => {
         />
         <FormField
           control={form.control}
-          name="caption"
+          name="file"
           render={({ field }) => (
             <FormItem>
               <FormLabel className="shad-form_label">Add Photos</FormLabel>

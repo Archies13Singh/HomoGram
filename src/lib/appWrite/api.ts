@@ -108,10 +108,13 @@ export async function createPost(post: INewPost) {
             throw Error
         }
         // convert tags into an array
-        const tags = post?.tags?.replace(/ /g, '').split(",") || []
+        const tags = post?.tags?.replace(/ /g, "").split(",") || []
 
-        // save post to database
-        const newPost = await databases.createDocument(appwriteConfig.databaseId, appwriteConfig.postsCollectionId, ID.unique(), {
+        // create post 
+        const newPost = await databases.createDocument(
+            appwriteConfig.databaseId,
+            appwriteConfig.postsCollectionId,
+            ID.unique(), {
             creator: post.userId,
             caption: post.caption,
             imageUrl: fileUrl,
@@ -124,7 +127,6 @@ export async function createPost(post: INewPost) {
             await deleteFile(uploadedFile.$id)
             throw Error
         }
-
         return newPost
     } catch (error) {
         console.error("Failed while creating the Post", error)
@@ -148,6 +150,7 @@ export async function upLoadFile(file: File) {
 export async function getFilePreview(fileId: string) {
     try {
         const fileUrl = storage.getFilePreview(appwriteConfig.storageId, fileId, 2000, 2000, 'top', 100)
+        if (!fileUrl) throw Error
         return fileUrl
     } catch (error) {
         console.error("Failed while taking the Post Preview", error)
@@ -171,7 +174,7 @@ export async function getRecentPosts() {
         appwriteConfig.postsCollectionId,
         [Query.orderDesc(`$createdAt`), Query.limit(20)]
     )
-    if(!posts) throw Error
+    if (!posts) throw Error
 
     return posts
 }
