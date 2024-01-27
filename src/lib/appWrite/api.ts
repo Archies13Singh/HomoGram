@@ -1,6 +1,7 @@
-import { INewPost, INewUser } from "@/types";
+import { INewPost, INewUser, IUpdatePost } from "@/types";
 import { account, appwriteConfig, avatars, databases, storage } from "./config";
 import { ID, Query } from 'appwrite'
+import { useQueryClient } from "@tanstack/react-query";
 
 export async function createUserAccount(user: INewUser) {
     try {
@@ -248,4 +249,86 @@ export async function deleteSavedPost(savedRecordId: string) {
         console.error("Error while deleting the post : ", error)
     }
 }
+
+export async function getPostById(postId: string) {
+    //get details of particular post in postForm
+    try {
+        const post = await databases.getDocument(
+            appwriteConfig.databaseId,
+            appwriteConfig.postsCollectionId,
+            postId
+        )
+        return post;
+    } catch (error) {
+        console.error("Not getting post id to edit the post : ", error)
+    }
+}
+
+
+export async function updatePost(post: IUpdatePost) {
+    //edit the details of particular post in postForm
+    const hasFiletoUpdate = post.file.length > 0;
+    console.log(post.file.length, post, "length")
+    try {
+        let image = {
+            imageUrl: post.imageUrl,
+            imageId: post.imageId,
+        }
+
+        if (hasFiletoUpdate) {
+            const uploadedFile = await upLoadFile(post.file[0]);
+            if (!uploadedFile) throw Error;
+            // get file url
+            const fileUrl = getFilePreviewww(uploadedFile.$id)
+            if (!fileUrl) {
+                deleteFile(uploadedFile.$id)
+                throw Error
+            }
+            image = { ...image, imageUrl: fileUrl, imageId: uploadedFile.$id }
+        }
+
+        // convert tags into an array
+        const tags = post?.tags?.replace(/ /g, "").split(",") || []
+        // create post 
+        const updatedPost = await databases.updateDocument(
+            appwriteConfig.databaseId,
+            appwriteConfig.postsCollectionId,
+            post.postId, {
+            caption: post.caption,
+            imageUrl: image.imageUrl,
+            imageId: image.imageId,
+            location: post.location,
+            tags: tags
+        })
+
+        console.log(updatedPost, "newPost")
+
+        if (!updatedPost) {
+            await deleteFile(post.imageId)
+            throw Error
+        }
+
+        return updatedPost;
+    } catch (error) {
+        console.error("Failed while creating the Post", error)
+    }
+}
+
+export async function deletePost(postId: string, imageId: string) {
+    if (!postId || !imageId) throw Error;
+
+    try {
+        await databases.deleteDocument(
+            appwriteConfig.databaseId,
+            appwriteConfig.postsCollectionId,
+            postId
+        )
+
+        return { status: 'OK' }
+    } catch (error) {
+        console.error("Error while deleting the post", error)
+    }
+
+}
+
 

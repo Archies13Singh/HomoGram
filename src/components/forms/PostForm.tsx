@@ -15,17 +15,23 @@ import FileUploader from "../shared/FileUploader";
 import { Input } from "../ui/input";
 import { PostValidation } from "@/lib/validation";
 import { Models } from "appwrite";
-import { useCreatePost } from "@/lib/react-query/queriesAndMutations";
+import {
+  useCreatePost,
+  useUpdatePost,
+} from "@/lib/react-query/queriesAndMutations";
 import { useUserContext } from "@/context/AuthContext";
 import { toast } from "../ui/use-toast";
 import { useNavigate } from "react-router-dom";
 
 type PostFormProps = {
   post?: Models.Document;
+  action: "Create" | "Update";
 };
-const PostForm = ({ post }: PostFormProps) => {
+const PostForm = ({ post, action }: PostFormProps) => {
   const { mutateAsync: createPost, isPending: isLoadingCreate } =
     useCreatePost();
+  const { mutateAsync: updatePost, isPending: isLoadingUpdate } =
+    useUpdatePost();
 
   const { user } = useUserContext();
 
@@ -41,12 +47,26 @@ const PostForm = ({ post }: PostFormProps) => {
     },
   });
 
-  const onSubmit = async(values: z.infer<typeof PostValidation>)=>{
+  const onSubmit = async (values: z.infer<typeof PostValidation>) => {
+    if (post && action === "Update") {
+      const updatedPost = await updatePost({
+        ...values,
+        postId: post.$id,
+        imageId: post?.imageId,
+        imageUrl: post?.imageUrl,
+      });
+      if (!updatedPost)
+        toast({
+          title: "Please try again , May be Post is not updated ",
+        });
+
+      return navigate(`/posts/${post.$id}`);
+    }
     const newPost = await createPost({
       ...values,
       userId: user.id,
     });
-    console.log(user,"userid")
+    console.log(user, "userid");
 
     if (!newPost) {
       toast({
@@ -55,7 +75,7 @@ const PostForm = ({ post }: PostFormProps) => {
     }
 
     navigate("/");
-  }
+  };
 
   return (
     <Form {...form}>
@@ -136,8 +156,11 @@ const PostForm = ({ post }: PostFormProps) => {
           <Button
             type="submit"
             className="shad-button_primary whitespace-nowrap"
+            disabled={isLoadingCreate || isLoadingUpdate}
           >
-            Submit
+            {isLoadingCreate || isLoadingUpdate
+              ? "Loading..."
+              : action + " Post"}
           </Button>
         </div>
       </form>
