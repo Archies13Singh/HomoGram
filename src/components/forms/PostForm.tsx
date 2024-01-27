@@ -41,12 +41,12 @@ const PostForm = ({ post }: PostFormProps) => {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof PostValidation>) {
-    
+  const onSubmit = async(values: z.infer<typeof PostValidation>)=>{
     const newPost = await createPost({
       ...values,
       userId: user.id,
     });
+    console.log(user,"userid")
 
     if (!newPost) {
       toast({

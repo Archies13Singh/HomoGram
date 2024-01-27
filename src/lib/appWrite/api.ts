@@ -22,7 +22,7 @@ export async function createUserAccount(user: INewUser) {
                 username: user.username,
                 imageUrl: avatarUrl,
             })
-        return newAccount
+        return newUser;
     } catch (error) {
         console.error(error)
         return error;
@@ -62,10 +62,18 @@ export async function signInAccount(user: {
         console.error("Sign In Error :", error)
     }
 }
+export async function getAccount() {
+    try {
+        const currentAccount = await account.get();
+        return currentAccount;
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 export async function getCurrentUser() {
     try {
-        const currentAccount = await account.get();
+        const currentAccount = await getAccount();
         if (!currentAccount) throw Error
 
         const currentUser = await databases.listDocuments(
@@ -97,19 +105,16 @@ export async function createPost(post: INewPost) {
     try {
         // Upload image to storage
         const uploadedFile = await upLoadFile(post.file[0]);
-
         if (!uploadedFile) throw Error;
-
+        console.log(post, "from api")
         // get file url
-        const fileUrl = getFilePreview(uploadedFile.$id)
-
+        const fileUrl = getFilePreviewww(uploadedFile.$id)
         if (!fileUrl) {
             deleteFile(uploadedFile.$id)
             throw Error
         }
         // convert tags into an array
         const tags = post?.tags?.replace(/ /g, "").split(",") || []
-
         // create post 
         const newPost = await databases.createDocument(
             appwriteConfig.databaseId,
@@ -122,6 +127,8 @@ export async function createPost(post: INewPost) {
             location: post.location,
             tags: tags
         })
+
+        console.log(newPost, "newPost")
 
         if (!newPost) {
             await deleteFile(uploadedFile.$id)
@@ -147,7 +154,7 @@ export async function upLoadFile(file: File) {
 }
 
 
-export async function getFilePreview(fileId: string) {
+export function getFilePreviewww(fileId: string) {
     try {
         const fileUrl = storage.getFilePreview(appwriteConfig.storageId, fileId, 2000, 2000, 'top', 100)
         if (!fileUrl) throw Error
@@ -160,7 +167,7 @@ export async function getFilePreview(fileId: string) {
 export async function deleteFile(fileId: string) {
     try {
         await storage.deleteFile(appwriteConfig.storageId, fileId);
-        return { status: "OK" }
+        return { status: "ok" }
 
     } catch (error) {
         console.error("Failed while deleting the file", error)
@@ -169,12 +176,76 @@ export async function deleteFile(fileId: string) {
 
 
 export async function getRecentPosts() {
-    const posts = await databases.listDocuments(
-        appwriteConfig.databaseId,
-        appwriteConfig.postsCollectionId,
-        [Query.orderDesc(`$createdAt`), Query.limit(20)]
-    )
-    if (!posts) throw Error
+    try {
+        const posts = await databases.listDocuments(
+            appwriteConfig.databaseId,
+            appwriteConfig.postsCollectionId,
+            [Query.orderDesc("$createdAt"), Query.limit(20)]
+        )
+        if (!posts) throw Error
 
-    return posts
+        return posts
+    } catch (error) {
+        console.log(error);
+
+    }
 }
+
+
+export async function likePost(postId: string, likesArray: string[]) {
+    try {
+        const updatesPost = await databases.updateDocument(
+            appwriteConfig.databaseId,
+            appwriteConfig.postsCollectionId,
+            postId,
+            {
+                likes: likesArray
+            }
+        )
+
+        if (!updatesPost) throw Error
+        return updatesPost;
+    }
+    catch (error) {
+        console.error("Error while liking the post : ", error)
+    }
+}
+
+
+export async function savePost(postId: string, userId: string) {
+    try {
+        const savePost = await databases.createDocument(
+            appwriteConfig.databaseId,
+            appwriteConfig.savesCollectionId,
+            ID.unique(),
+            {
+                post: postId,
+                user: userId,
+            }
+        )
+        console.log("savePost is also got called", savePost)
+        if (!savePost) throw Error
+        return savePost;
+    }
+    catch (error) {
+        console.error("Error while saving the post : ", error)
+    }
+}
+
+
+export async function deleteSavedPost(savedRecordId: string) {
+    try {
+        const statusCode = await databases.deleteDocument(
+            appwriteConfig.databaseId,
+            appwriteConfig.savesCollectionId,
+            savedRecordId,
+        )
+
+        if (!statusCode) throw Error
+        return statusCode;
+    }
+    catch (error) {
+        console.error("Error while deleting the post : ", error)
+    }
+}
+

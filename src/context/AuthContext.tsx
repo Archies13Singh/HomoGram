@@ -1,7 +1,7 @@
-import { getCurrentUser } from "@/lib/appWrite/api";
-import { IContextType, IUser } from "@/types";
-import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { createContext, useContext, useEffect, useState } from "react";
+import { IContextType, IUser } from "@/types";
+import { getCurrentUser } from "@/lib/appWrite/api";
 
 export const INTIAL_USER = {
   id: "",
@@ -63,7 +63,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     ) {
       navigate("/sign-in");
     }
-
+    
     checkAuthUser();
   }, []);
 

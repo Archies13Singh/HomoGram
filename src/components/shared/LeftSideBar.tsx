@@ -13,7 +13,6 @@ const LeftSideBar = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    console.log(isSuccess, "suss");
     if (isSuccess) {
       navigate(0);
     }
