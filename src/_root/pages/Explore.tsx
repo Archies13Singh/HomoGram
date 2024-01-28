@@ -71,7 +71,7 @@ const Explore = () => {
       <div className="flex flex-wrap gap-9 w-full max-w-5xl">
         {shouldShowSearchResults ? (
           <SearchResults
-            isSearchResults={isSearchFetching}
+            isSearchFetching={isSearchFetching}
             searchedPosts={searchedPosts}
           />
         ) : shouldShowPosts ? (
@@ -80,7 +80,7 @@ const Explore = () => {
           </p>
         ) : (
           posts?.pages.map((item, index) => (
-            <GridPostList key={`page=${index}`} posts={item?.documents||[]} />
+            <GridPostList key={`page=${index}`} posts={item?.documents || []} />
           ))
         )}
       </div>

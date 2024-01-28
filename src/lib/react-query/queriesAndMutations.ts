@@ -145,7 +145,10 @@ export const useDeletePost = () => {
 export const useGetPosts = () => {
     return useInfiniteQuery({
         queryKey: [QUERY_KEYS.GET_INFINITE_POSTS],
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         queryFn: getInfinitePosts as any,
+        initialPageParam: 1,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         getNextPageParam: (lastPage: any) => {
             if (lastPage && lastPage.documents.length === 0) return null;
 
