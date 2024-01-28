@@ -18,7 +18,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSignInAccount } from "@/lib/react-query/queriesAndMutations";
 import { useUserContext } from "@/context/AuthContext";
 import { useEffect, useState } from "react";
-import { imageNameWithUrl, imageUrl } from "@/types/utils";
+import { imageNameWithUrl} from "@/types/utils";
 
 const SignInForm = () => {
   const { checkAuthUser, isLoading: isUserLoading } = useUserContext();
