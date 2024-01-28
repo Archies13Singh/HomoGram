@@ -1,4 +1,4 @@
-import { convertFileToUrl } from "@/types/utils";
+import { convertFileToUrl, imageNameWithUrl } from "@/types/utils";
 import { useCallback, useState } from "react";
 import { FileWithPath, useDropzone } from "react-dropzone";
 
@@ -34,7 +34,7 @@ const ProfileUploader = ({ fieldChange, mediaUrl }: ProfileUploaderProps) => {
 
       <div className="cursor-pointer flex-center gap-4">
         <img
-          src={fileUrl || "/assets/icons/profile-placeholder.svg"}
+          src={fileUrl || imageNameWithUrl("profile-placeholder.svg")}
           alt="image"
           className="h-24 w-24 rounded-full object-cover object-top"
         />

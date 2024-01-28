@@ -56,3 +56,8 @@ export const multiFormatDateString = (timestamp: string = ""): string => {
 export const checkIsLiked = (likeList: string[], userId: string) => {
   return likeList.includes(userId);
 };
+
+
+export const imageNameWithUrl = (imageName: string) => {
+  return `https://social-nest.000webhostapp.com/assets/${imageName}`
+}

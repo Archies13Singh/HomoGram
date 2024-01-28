@@ -1,3 +1,4 @@
+import { imageNameWithUrl } from "@/types/utils";
 import { Outlet, Navigate } from "react-router-dom";
 
 const AuthLayout = () => {
@@ -12,7 +13,7 @@ const AuthLayout = () => {
             <Outlet />
           </section>
           <img
-            src="../../public/assets/images/side-img.png"
+            src={imageNameWithUrl("side-img.png")}
             alt="logo"
             className="hidden xl:block h-screen w-2/2 object-cover bg-no-repeat"
           />

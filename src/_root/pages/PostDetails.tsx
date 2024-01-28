@@ -8,7 +8,7 @@ import {
   useGetPostById,
   useGetUserPosts,
 } from "@/lib/react-query/queriesAndMutations";
-import { formatDateString } from "@/types/utils";
+import { formatDateString, imageNameWithUrl } from "@/types/utils";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 const PostDetails = () => {
@@ -47,7 +47,7 @@ const PostDetails = () => {
                 <img
                   src={
                     post?.creator?.imageUrl ||
-                    "../../../public/assets/icons/profile-placeholder.svg"
+                    imageNameWithUrl("profile-placeholder.svg")
                   }
                   alt="creator"
                   className="rounded-full"
@@ -77,7 +77,7 @@ const PostDetails = () => {
                   className={`${user.id !== post?.creator.$id && "hidden"}`}
                 >
                   <img
-                    src="../../../public/assets/icons/edit.svg"
+                    src= {imageNameWithUrl("edit.svg")} 
                     alt="edit"
                     width={24}
                     height={24}
@@ -91,7 +91,7 @@ const PostDetails = () => {
                   }`}
                 >
                   <img
-                    src="../../../public/assets/icons/delete.svg"
+                    src={imageNameWithUrl("delete.svg")}
                     alt="delete"
                     width={24}
                     height={24}

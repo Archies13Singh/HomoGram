@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import { useSignOutAccount } from "@/lib/react-query/queriesAndMutations";
 import { useUserContext } from "@/context/AuthContext";
+import { imageNameWithUrl } from "@/types/utils";
 
 const Topbar = () => {
   const { mutate: signOut, isSuccess } = useSignOutAccount();
@@ -21,7 +22,7 @@ const Topbar = () => {
       <div className="flex-between py-4 px-5">
         <Link to="/" className="flex gap-3 items-center">
           <img
-            src="../../../public/assets/images/logo.png"
+            src={imageNameWithUrl("logo.png")}
             alt="logo"
             width={160}
             height={160}
@@ -30,11 +31,12 @@ const Topbar = () => {
 
         <div className="flex gap-4" onClick={() => signOut()}>
           <Button variant="ghost" className="shad-button_ghost">
-            <img src="../../../public/assets/icons/logout.svg" alt="logout" />
+
+            <img src={imageNameWithUrl("logout.svg")} alt="logout" />
           </Button>
           <Link to={`/profile/${user.id}`} className="flex-center gap-3">
             <img
-              src={user.imageUrl || "../../../public/assets/images/profile.png"}
+              src={user.imageUrl || imageNameWithUrl("profile.png")}
               alt="profile"
               className="'h-8 w-8 rounded-full"
             />

@@ -4,7 +4,7 @@ import {
   useLikePost,
   useSavePost,
 } from "@/lib/react-query/queriesAndMutations";
-import { checkIsLiked } from "@/types/utils";
+import { checkIsLiked, imageNameWithUrl } from "@/types/utils";
 import { Models } from "appwrite";
 import React, { useEffect, useState } from "react";
 import Loader from "./Loader";
@@ -71,8 +71,8 @@ const PostStats = ({ post, userId }: PostStatsProps) => {
         <img
           src={`${
             checkIsLiked(likes, userId)
-              ? "../../../public/assets/icons/liked.svg"
-              : "../../../public/assets/icons/like.svg"
+              ? imageNameWithUrl("liked.svg")
+              : imageNameWithUrl("like.svg")
           }`}
           alt="like"
           height={20}
@@ -90,8 +90,8 @@ const PostStats = ({ post, userId }: PostStatsProps) => {
           <img
             src={`${
               saved
-                ? "../../../public/assets/icons/saved.svg"
-                : "../../../public/assets/icons/save.svg"
+                ? imageNameWithUrl("saved.svg")
+                : imageNameWithUrl("save.svg")
             }`}
             alt="share"
             height={20}

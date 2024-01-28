@@ -1,5 +1,6 @@
 import { bottombarLinks } from "@/constants";
 import { INavLink } from "@/types";
+import { imageNameWithUrl } from "@/types/utils";
 import { Link, useLocation } from "react-router-dom";
 
 const BottomBar = () => {
@@ -17,7 +18,7 @@ const BottomBar = () => {
             to={link.route}
           >
             <img
-              src={link.imgURL}
+              src={imageNameWithUrl(link.imgName)}
               alt={link.label}
               className={`${isActive && "invert-white"}`}
               width={20}

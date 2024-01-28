@@ -8,7 +8,7 @@ export type IContextType = {
 };
 
 export type INavLink = {
-  imgURL: string;
+  imgName: string;
   route: string;
   label: string;
 };

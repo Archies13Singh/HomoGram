@@ -1,5 +1,5 @@
 import { useUserContext } from "@/context/AuthContext";
-import { formatDateString } from "@/types/utils";
+import { formatDateString, imageNameWithUrl } from "@/types/utils";
 import { Models } from "appwrite";
 import { Link } from "react-router-dom";
 import PostStats from "./PostStats";
@@ -21,7 +21,7 @@ const PostCard = ({ post }: PostCardProps) => {
             <img
               src={
                 post?.creator?.imageUrl ||
-                "../../../public/assets/icons/profile-placeholder.svg"
+                imageNameWithUrl("profile-placeholder.svg")
               }
               alt="creator"
               className="rounded-full w-12 lg:h-12"
@@ -48,7 +48,7 @@ const PostCard = ({ post }: PostCardProps) => {
           className={`${user.id !== post.creator.$id && "hidden"} `}
         >
           <img
-            src="../../../public/assets/icons/edit.svg"
+            src={imageNameWithUrl("edit.svg")}
             alt=""
             width={20}
             height={20}
@@ -69,7 +69,7 @@ const PostCard = ({ post }: PostCardProps) => {
         <img
           src={
             post.imageUrl ||
-            "../../../public/assets/icons/profile-placeholder.svg"
+            imageNameWithUrl("profile-placeholder.svg")
           }
           alt="post image"
           className="post-card_img"

@@ -12,6 +12,7 @@ import {
 } from "react-router-dom";
 import LikedPosts from "./LikePost";
 import { Button } from "@/components/ui/button";
+import { imageNameWithUrl } from "@/types/utils";
 
 interface StabBlockProps {
   value: string | number;
@@ -55,7 +56,7 @@ const Profile = () => {
           >
             <img
               src={
-                currentUser.imageUrl || "/assets/icons/profile-placeholder.svg"
+                currentUser.imageUrl || imageNameWithUrl("profile-placeholder.svg")
               }
               alt="profile"
               style={{
@@ -98,7 +99,7 @@ const Profile = () => {
                 }`}
               >
                 <img
-                  src={"/assets/icons/edit.svg"}
+                  src= {imageNameWithUrl("edit.svg")}
                   alt="edit"
                   width={20}
                   height={20}
@@ -126,7 +127,7 @@ const Profile = () => {
             }`}
           >
             <img
-              src={"/assets/icons/posts.svg"}
+              src={imageNameWithUrl("posts.svg")}
               alt="posts"
               width={20}
               height={20}
@@ -140,7 +141,7 @@ const Profile = () => {
             }`}
           >
             <img
-              src={"/assets/icons/like.svg"}
+              src={imageNameWithUrl("like.svg")}
               alt="like"
               width={20}
               height={20}

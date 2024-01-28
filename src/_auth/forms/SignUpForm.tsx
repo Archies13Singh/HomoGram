@@ -21,6 +21,7 @@ import {
 } from "@/lib/react-query/queriesAndMutations";
 import { useUserContext } from "@/context/AuthContext";
 import { useState } from "react";
+import { imageNameWithUrl } from "@/types/utils";
 
 const SignUpForm = () => {
   const [error, setError] = useState("");
@@ -71,7 +72,7 @@ const SignUpForm = () => {
     <Form {...form}>
       <div className="sm:w-400 flex-center flex-col">
         <img
-          src="../../../public/assets/images/logo.png"
+          src={imageNameWithUrl("logo.png")}
           alt=""
           style={{ objectFit: "contain", marginTop: 32 }}
           width={312}
