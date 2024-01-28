@@ -28,7 +28,7 @@ const PostDetails = () => {
   );
 
   const handleDeletePost = () => {
-    deletePost({ postId: id, imageId: post?.imageId });
+    deletePost({ postId: id||"", imageId: post?.imageId });
     navigate(-1);
   };
   return (
@@ -61,7 +61,7 @@ const PostDetails = () => {
                   </p>
                   <div className="flex-center gap-2 text-light-3">
                     <p className="subtle-semibold lg:small-regular">
-                      {formatDateString(post?.$createdAt)}
+                      {formatDateString(post?.$createdAt || "")}
                     </p>
                   </div>
                   <div>

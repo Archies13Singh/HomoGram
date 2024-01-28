@@ -2,9 +2,6 @@ import Loader from "@/components/shared/Loader";
 import UserCard from "@/components/shared/UserCard";
 import { useGetUsers } from "@/lib/react-query/queriesAndMutations";
 
-
-
-
 const AllUsers = () => {
 
   const { data: creators, isPending } = useGetUsers();
@@ -18,9 +15,8 @@ const AllUsers = () => {
           <Loader />
         ) : (
           <ul className="user-grid">
-            {console.log(creators,"creatorrr")}
             {creators?.documents.map((creator) => (
-              <li key={creator?.$id} className="flex-1 min-w-[200px] w-full  ">
+              <li key={creator?.$id} className="flex-1 min-w-[200px] w-full">
                 <UserCard user={creator} />
               </li>
             ))}

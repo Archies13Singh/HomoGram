@@ -14,8 +14,8 @@ import {
 } from "./_root/pages";
 import SignUpForm from "./_auth/forms/SignUpForm";
 import AuthLayout from "./_auth/AuthLayout";
-import RootLayout from "./_root/rootLayout";
 import { Toaster } from "@/components/ui/toaster";
+import RootLayout from "./_root/RootLayout";
 
 const App = () => {
   return (
