@@ -6,7 +6,6 @@ import { useToast } from "@/components/ui/use-toast";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -23,9 +22,10 @@ import {
   useSignInAccount,
 } from "@/lib/react-query/queriesAndMutations";
 import { useUserContext } from "@/context/AuthContext";
+import { useState } from "react";
 
 const SignUpForm = () => {
-  const { toast } = useToast();
+  const [error, setError] = useState("");
   const { checkAuthUser, isLoading: isUserLoading } = useUserContext();
   const navigate = useNavigate();
   const { mutateAsync: createUserAccount, isPending: isCreatingAccount } =
@@ -49,9 +49,7 @@ const SignUpForm = () => {
     const newUser = await createUserAccount(values);
 
     if (!newUser) {
-      return toast({
-        title: "Sign up Failed , Please try again",
-      });
+      setError("Sign up Failed , Please try again");
     }
     const session = await signInAccount({
       email: values.email,
@@ -59,9 +57,7 @@ const SignUpForm = () => {
     });
 
     if (!session) {
-      return toast({
-        title: "Sign up Failed , Please try again",
-      });
+      setError("Sign up Failed , Please try again");
     }
     const isLoggedIn = await checkAuthUser();
 
@@ -69,22 +65,26 @@ const SignUpForm = () => {
       form.reset();
       navigate("/");
     } else {
-      return toast({
-        title: "Sign up Failed , Please try again",
-      });
+      setError("Sign up Failed , Please try again");
     }
   }
 
   return (
     <Form {...form}>
       <div className="sm:w-400 flex-center flex-col">
-        <img src="../../../public/assets/images/logo.png" alt="" style={{objectFit:'contain',marginTop:32}} width={312} height={312}/>
+        <img
+          src="../../../public/assets/images/logo.png"
+          alt=""
+          style={{ objectFit: "contain", marginTop: 32 }}
+          width={312}
+          height={312}
+        />
         <h2 className="h3-bold md:h2-bold pt-5 sm:pt-12">
           {" "}
           Create a new Account{" "}
         </h2>
         <p className="text-light-3 small-medium md:base-regular">
-          To use SnapGram , please enter your details
+          To use SocialNest , please enter your details
         </p>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -100,7 +100,6 @@ const SignUpForm = () => {
                   <Input type="text" className="shad-input" {...field} />
                 </FormControl>
 
-                
                 <FormMessage />
               </FormItem>
             )}
@@ -115,7 +114,6 @@ const SignUpForm = () => {
                   <Input type="text" className="shad-input" {...field} />
                 </FormControl>
 
-                
                 <FormMessage />
               </FormItem>
             )}
@@ -130,7 +128,6 @@ const SignUpForm = () => {
                   <Input type="email" className="shad-input" {...field} />
                 </FormControl>
 
-                
                 <FormMessage />
               </FormItem>
             )}
@@ -145,13 +142,19 @@ const SignUpForm = () => {
                   <Input type="password" className="shad-input" {...field} />
                 </FormControl>
 
-                
                 <FormMessage />
               </FormItem>
             )}
           />
+          {error !== "" && (
+            <div className="flex-center flex-col">
+              <p className="italic text-center p-4 text-amber-700 text-xs">
+                {error}
+              </p>
+            </div>
+          )}
           <Button type="submit" className="shad-button_primary">
-            {isCreatingAccount ? (
+            {isCreatingAccount || isSigningIn || isUserLoading ? (
               <div className=" flex center gap-2">
                 <Loader />
                 Loading...

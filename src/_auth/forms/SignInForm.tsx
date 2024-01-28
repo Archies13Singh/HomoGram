@@ -2,11 +2,9 @@ import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useToast } from "@/components/ui/use-toast";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -19,13 +17,23 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { useSignInAccount } from "@/lib/react-query/queriesAndMutations";
 import { useUserContext } from "@/context/AuthContext";
+import { useEffect, useState } from "react";
 
 const SignInForm = () => {
-  const { toast } = useToast();
   const { checkAuthUser, isLoading: isUserLoading } = useUserContext();
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const { mutateAsync: signInAccount } = useSignInAccount();
+
+  useEffect(() => {
+    if (error !== "") {
+      setTimeout(() => {
+        setError("");
+
+      }, 5000);
+    }
+  }, [error]);
 
   // Define form
   const form = useForm<z.infer<typeof SignInValidation>>({
@@ -43,9 +51,7 @@ const SignInForm = () => {
     });
 
     if (!session) {
-      return toast({
-        title: "Sign up Failed , Please try again",
-      });
+      setError("Invalid credentials. Please check the email and password");
     }
     const isLoggedIn = await checkAuthUser();
 
@@ -53,9 +59,7 @@ const SignInForm = () => {
       form.reset();
       navigate("/");
     } else {
-      return toast({
-        title: "Sign up Failed , Please try again",
-      });
+      setError("Invalid credentials. Please check the email and password");
     }
   }
 
@@ -76,7 +80,7 @@ const SignInForm = () => {
           Login in to your Account{" "}
         </h2>
         <p className="text-light-3 small-medium md:base-regular">
-          To use SnapGram , please enter your details
+          To use SocialNest , please enter your details
         </p>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -108,7 +112,18 @@ const SignInForm = () => {
               </FormItem>
             )}
           />
-          <Button type="submit" className="shad-button_primary" disabled = {isUserLoading}>
+          {error !== "" && (
+            <div className="flex-center flex-col">
+              <p className="italic text-center p-4 text-amber-700 text-xs">
+                {error}
+              </p>
+            </div>
+          )}
+          <Button
+            type="submit"
+            className="shad-button_primary"
+            disabled={isUserLoading}
+          >
             {isUserLoading ? (
               <div className=" flex center gap-2">
                 <Loader />
