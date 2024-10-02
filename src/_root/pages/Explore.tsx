@@ -7,7 +7,6 @@ import {
   useGetPosts,
   useSearchPosts,
 } from "@/lib/react-query/queriesAndMutations";
-import { imageNameWithUrl } from "@/types/utils";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 
@@ -43,7 +42,7 @@ const Explore = () => {
         <h2 className="h3-bold md:h2-bold w-full">Search Posts</h2>
         <div className="flex gap-1 px-4 w-full rounded-lg bg-dark-4">
           <img
-            src={imageNameWithUrl("search.svg")}
+            src="https://firebasestorage.googleapis.com/v0/b/imagestorage-6c529.appspot.com/o/HFTkj4OSb3YxnwMBg9OVQxzTrMK2%2Fimages%2Fsearch.svg?alt=media&token=e229fe93-98cc-4f3b-8526-12c8e8234b52"
             alt=""
             width={24}
             height={24}
@@ -62,7 +61,7 @@ const Explore = () => {
         <div className="flex-center gap-3 bg-dark-3 rounded-xl px-4 py-2 cursor-pointer">
           <p className="small-medium md:base-medium text-light-2">All</p>
           <img
-            src={imageNameWithUrl("filter.svg")}
+            src="https://firebasestorage.googleapis.com/v0/b/imagestorage-6c529.appspot.com/o/HFTkj4OSb3YxnwMBg9OVQxzTrMK2%2Fimages%2Ffilter.png?alt=media&token=27692c56-500b-4c63-9eef-243f2f558974"
             alt="filter"
             width={20}
             height={20}

@@ -8,7 +8,7 @@ import {
   useGetPostById,
   useGetUserPosts,
 } from "@/lib/react-query/queriesAndMutations";
-import { formatDateString, imageNameWithUrl } from "@/types/utils";
+import { formatDateString } from "@/types/utils";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 const PostDetails = () => {
@@ -47,7 +47,7 @@ const PostDetails = () => {
                 <img
                   src={
                     post?.creator?.imageUrl ||
-                    imageNameWithUrl("profile-placeholder.svg")
+                    "https://firebasestorage.googleapis.com/v0/b/imagestorage-6c529.appspot.com/o/HFTkj4OSb3YxnwMBg9OVQxzTrMK2%2Fimages%2Fprofile-placeholder.png?alt=media&token=48eab7a8-3048-4192-8f94-0d8c6d0af786"
                   }
                   alt="creator"
                   className="rounded-full"
@@ -77,7 +77,7 @@ const PostDetails = () => {
                   className={`${user.id !== post?.creator.$id && "hidden"}`}
                 >
                   <img
-                    src= {imageNameWithUrl("edit.svg")} 
+                    src= "https://firebasestorage.googleapis.com/v0/b/imagestorage-6c529.appspot.com/o/HFTkj4OSb3YxnwMBg9OVQxzTrMK2%2Fimages%2Fedit.png?alt=media&token=01aad3fc-6a09-4dbb-8d43-15405ffe4394"
                     alt="edit"
                     width={24}
                     height={24}
@@ -91,7 +91,7 @@ const PostDetails = () => {
                   }`}
                 >
                   <img
-                    src={imageNameWithUrl("delete.svg")}
+                    src="https://firebasestorage.googleapis.com/v0/b/imagestorage-6c529.appspot.com/o/HFTkj4OSb3YxnwMBg9OVQxzTrMK2%2Fimages%2Fdelete.png?alt=media&token=d0d30461-d393-4577-bfab-564d541d1d98"
                     alt="delete"
                     width={24}
                     height={24}

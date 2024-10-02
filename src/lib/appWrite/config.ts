@@ -15,7 +15,6 @@ export const client = new Client()
 try {
     client.setEndpoint(appwriteConfig.url);
     client.setProject(appwriteConfig.projectId);
-    console.log(client,"cliiii")
 } catch (error) {
     console.error('Invalid configuration', error);
 }

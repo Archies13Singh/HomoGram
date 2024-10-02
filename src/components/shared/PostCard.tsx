@@ -1,5 +1,5 @@
 import { useUserContext } from "@/context/AuthContext";
-import { formatDateString, imageNameWithUrl } from "@/types/utils";
+import { formatDateString } from "@/types/utils";
 import { Models } from "appwrite";
 import { Link } from "react-router-dom";
 import PostStats from "./PostStats";
@@ -21,7 +21,7 @@ const PostCard = ({ post }: PostCardProps) => {
             <img
               src={
                 post?.creator?.imageUrl ||
-                imageNameWithUrl("profile-placeholder.svg")
+                "https://firebasestorage.googleapis.com/v0/b/imagestorage-6c529.appspot.com/o/HFTkj4OSb3YxnwMBg9OVQxzTrMK2%2Fimages%2Fprofile-placeholder.png?alt=media&token=48eab7a8-3048-4192-8f94-0d8c6d0af786"
               }
               alt="creator"
               className="rounded-full w-12 lg:h-12"
@@ -48,7 +48,7 @@ const PostCard = ({ post }: PostCardProps) => {
           className={`${user.id !== post.creator.$id && "hidden"} `}
         >
           <img
-            src={imageNameWithUrl("edit.svg")}
+            src="https://firebasestorage.googleapis.com/v0/b/imagestorage-6c529.appspot.com/o/HFTkj4OSb3YxnwMBg9OVQxzTrMK2%2Fimages%2Fedit.png?alt=media&token=01aad3fc-6a09-4dbb-8d43-15405ffe4394"
             alt=""
             width={20}
             height={20}
@@ -69,7 +69,7 @@ const PostCard = ({ post }: PostCardProps) => {
         <img
           src={
             post.imageUrl ||
-            imageNameWithUrl("profile-placeholder.svg")
+            "https://firebasestorage.googleapis.com/v0/b/imagestorage-6c529.appspot.com/o/HFTkj4OSb3YxnwMBg9OVQxzTrMK2%2Fimages%2Fprofile-placeholder.png?alt=media&token=48eab7a8-3048-4192-8f94-0d8c6d0af786"
           }
           alt="post image"
           className="post-card_img"

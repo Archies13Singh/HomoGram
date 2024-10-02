@@ -31,7 +31,7 @@ const LeftSideBar = () => {
         </Link>
         <Link to={`/profile/${user.id}`} className="flex gap-3 items-center">
           <img
-            src={user.imageUrl || imageNameWithUrl("profile.png")}
+            src={user.imageUrl || "https://firebasestorage.googleapis.com/v0/b/imagestorage-6c529.appspot.com/o/HFTkj4OSb3YxnwMBg9OVQxzTrMK2%2Fimages%2Fprofile-placeholder.png?alt=media&token=48eab7a8-3048-4192-8f94-0d8c6d0af786"}
             alt="profile"
             className="w-14 h-14 rounded-full"
           />
@@ -56,11 +56,12 @@ const LeftSideBar = () => {
                   className="flex gap-4 items-center p-4"
                 >
                   <img
-                    src={imageNameWithUrl(link?.imgName)}
+                    src={link?.imgName}
                     alt={link.label}
                     className={`group-hover:invert-white ${
                       isActive && "invert-white"
                     }`}
+                    width={35} height={35}
                   />
                   {link.label}
                 </NavLink>
@@ -71,7 +72,7 @@ const LeftSideBar = () => {
       </div>
       <div className="flex gap-4" onClick={() => signOut()}>
         <Button variant="ghost" className="shad-button_ghost">
-          <img src={imageNameWithUrl("logout.svg")} alt="logout" />
+          <img width={35} height={35} src="https://firebasestorage.googleapis.com/v0/b/imagestorage-6c529.appspot.com/o/HFTkj4OSb3YxnwMBg9OVQxzTrMK2%2Fimages%2Flogout.png?alt=media&token=971fb0d6-1cdb-46eb-bfa8-006ac100d6e2" alt="logout" />
           <p className="small-medium lg:base-medium">Logout</p>
         </Button>
       </div>

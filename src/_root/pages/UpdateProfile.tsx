@@ -22,7 +22,6 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import ProfileUploader from "@/components/shared/ProfileUploader";
-import { imageNameWithUrl } from "@/types/utils";
 
 export const ProfileValidation = z.object({
   file: z.custom<File[]>(),
@@ -93,7 +92,7 @@ const UpdateProfile = () => {
       <div className="common-container">
         <div className="flex-start gap-3 justify-start w-full max-w-5xl">
           <img
-            src={imageNameWithUrl("edit.svg")}
+            src="https://firebasestorage.googleapis.com/v0/b/imagestorage-6c529.appspot.com/o/HFTkj4OSb3YxnwMBg9OVQxzTrMK2%2Fimages%2Fedit.png?alt=media&token=01aad3fc-6a09-4dbb-8d43-15405ffe4394"
             width={36}
             height={36}
             alt="edit"

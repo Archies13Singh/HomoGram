@@ -4,7 +4,7 @@ import {
   useLikePost,
   useSavePost,
 } from "@/lib/react-query/queriesAndMutations";
-import { checkIsLiked, imageNameWithUrl } from "@/types/utils";
+import { checkIsLiked } from "@/types/utils";
 import { Models } from "appwrite";
 import React, { useEffect, useState } from "react";
 import Loader from "./Loader";
@@ -71,8 +71,8 @@ const PostStats = ({ post, userId }: PostStatsProps) => {
         <img
           src={`${
             checkIsLiked(likes, userId)
-              ? imageNameWithUrl("liked.svg")
-              : imageNameWithUrl("like.svg")
+              ? "https://firebasestorage.googleapis.com/v0/b/imagestorage-6c529.appspot.com/o/HFTkj4OSb3YxnwMBg9OVQxzTrMK2%2Fimages%2Fliked.png?alt=media&token=828f4df8-5c1a-4eed-993d-94e76d650e64"
+              : "https://firebasestorage.googleapis.com/v0/b/imagestorage-6c529.appspot.com/o/HFTkj4OSb3YxnwMBg9OVQxzTrMK2%2Fimages%2Flike.png?alt=media&token=5e14aa87-276b-4dba-bca4-f2a32aa24e76"
           }`}
           alt="like"
           height={20}
@@ -90,8 +90,8 @@ const PostStats = ({ post, userId }: PostStatsProps) => {
           <img
             src={`${
               saved
-                ? imageNameWithUrl("saved.svg")
-                : imageNameWithUrl("save.svg")
+                ? "https://firebasestorage.googleapis.com/v0/b/imagestorage-6c529.appspot.com/o/HFTkj4OSb3YxnwMBg9OVQxzTrMK2%2Fimages%2Fsaved.png?alt=media&token=48d27f23-3b55-4e2b-ad3d-ae5c3d7b43e1"
+                : "https://firebasestorage.googleapis.com/v0/b/imagestorage-6c529.appspot.com/o/HFTkj4OSb3YxnwMBg9OVQxzTrMK2%2Fimages%2Fsave.png?alt=media&token=0f92ad37-3d95-4c61-b7a9-b6bbe32536ae"
             }`}
             alt="share"
             height={20}

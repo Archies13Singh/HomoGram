@@ -1,7 +1,6 @@
 import GridPostList from "@/components/shared/GridPostList";
 import Loader from "@/components/shared/Loader";
 import { useGetCurrentUser } from "@/lib/react-query/queriesAndMutations";
-import { imageNameWithUrl } from "@/types/utils";
 import { Models } from "appwrite";
 
 const Saved = () => {
@@ -20,7 +19,7 @@ const Saved = () => {
     <div className="saved-container">
       <div className="flex gap-2 w-full max-w-5xl">
         <img
-          src={imageNameWithUrl("save.svg")}
+          src="https://firebasestorage.googleapis.com/v0/b/imagestorage-6c529.appspot.com/o/HFTkj4OSb3YxnwMBg9OVQxzTrMK2%2Fimages%2Fsave.png?alt=media&token=0f92ad37-3d95-4c61-b7a9-b6bbe32536ae"
           width={36}
           height={36}
           alt="edit"

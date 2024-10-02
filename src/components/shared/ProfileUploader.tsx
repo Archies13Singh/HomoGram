@@ -1,4 +1,4 @@
-import { convertFileToUrl, imageNameWithUrl } from "@/types/utils";
+import { convertFileToUrl } from "@/types/utils";
 import { useCallback, useState } from "react";
 import { FileWithPath, useDropzone } from "react-dropzone";
 
@@ -34,7 +34,7 @@ const ProfileUploader = ({ fieldChange, mediaUrl }: ProfileUploaderProps) => {
 
       <div className="cursor-pointer flex-center gap-4">
         <img
-          src={fileUrl || imageNameWithUrl("profile-placeholder.svg")}
+          src={fileUrl || "https://firebasestorage.googleapis.com/v0/b/imagestorage-6c529.appspot.com/o/HFTkj4OSb3YxnwMBg9OVQxzTrMK2%2Fimages%2Fprofile-placeholder.png?alt=media&token=48eab7a8-3048-4192-8f94-0d8c6d0af786"}
           alt="image"
           className="h-24 w-24 rounded-full object-cover object-top"
         />

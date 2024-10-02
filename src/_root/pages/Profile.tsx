@@ -12,7 +12,6 @@ import {
 } from "react-router-dom";
 import LikedPosts from "./LikePost";
 import { Button } from "@/components/ui/button";
-import { imageNameWithUrl } from "@/types/utils";
 
 interface StabBlockProps {
   value: string | number;
@@ -56,7 +55,7 @@ const Profile = () => {
           >
             <img
               src={
-                currentUser.imageUrl || imageNameWithUrl("profile-placeholder.svg")
+                currentUser.imageUrl || "https://firebasestorage.googleapis.com/v0/b/imagestorage-6c529.appspot.com/o/HFTkj4OSb3YxnwMBg9OVQxzTrMK2%2Fimages%2Fprofile-placeholder.png?alt=media&token=48eab7a8-3048-4192-8f94-0d8c6d0af786"
               }
               alt="profile"
               style={{
@@ -99,7 +98,7 @@ const Profile = () => {
                 }`}
               >
                 <img
-                  src= {imageNameWithUrl("edit.svg")}
+                  src= "https://firebasestorage.googleapis.com/v0/b/imagestorage-6c529.appspot.com/o/HFTkj4OSb3YxnwMBg9OVQxzTrMK2%2Fimages%2Fedit.png?alt=media&token=01aad3fc-6a09-4dbb-8d43-15405ffe4394"
                   alt="edit"
                   width={20}
                   height={20}
@@ -127,7 +126,7 @@ const Profile = () => {
             }`}
           >
             <img
-              src={imageNameWithUrl("posts.svg")}
+              src="https://firebasestorage.googleapis.com/v0/b/imagestorage-6c529.appspot.com/o/HFTkj4OSb3YxnwMBg9OVQxzTrMK2%2Fimages%2Fposts.png?alt=media&token=9569c64b-a344-4fb5-8dc2-51ddd4116510"
               alt="posts"
               width={20}
               height={20}
@@ -141,7 +140,7 @@ const Profile = () => {
             }`}
           >
             <img
-              src={imageNameWithUrl("like.svg")}
+              src="https://firebasestorage.googleapis.com/v0/b/imagestorage-6c529.appspot.com/o/HFTkj4OSb3YxnwMBg9OVQxzTrMK2%2Fimages%2Flike.png?alt=media&token=5e14aa87-276b-4dba-bca4-f2a32aa24e76"
               alt="like"
               width={20}
               height={20}
